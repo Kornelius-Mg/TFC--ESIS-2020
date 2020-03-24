@@ -1,0 +1,15 @@
+Besoin: Creation d'un systeme "intelligent" d'aide à la surveillance
+
+Specifications:
+	- Analyser les images venant de toutes les cameras de surveillance
+	- Detecter des objets non-autorisés
+	- Detecter les comportements non-autorisés
+	- Detecter, en cas de besoin, les personnes non-autorisées
+	- Notifier les dangers potentiels
+	- Pointer si possible les personnes ou les objets à l'origine du dangers
+	
+Conception:
+	- l'analyse des images est fait par opencv
+	- Pour la detection, on utilise les algorithmes de reconnaissance faciales, d'objets et de comportements (Deep learning)
+	- Notification et pointage : Opencv et logging library de python
+	
