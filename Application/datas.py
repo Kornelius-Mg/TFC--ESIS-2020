@@ -1,7 +1,10 @@
-from enum import Flag
 from models import Utilisateur
 import sqlalchemy
 from sqlalchemy.orm import sessionmaker
+
+import time
+
+import session as session_mod
 
 engine = sqlalchemy.create_engine("mysql://root:@localhost/evesurvey", echo=False)
 
@@ -79,11 +82,22 @@ def get_user(id: int) -> Utilisateur:
         return utilisateur
 
 def login_user(email: str, password:str) -> list:
+
+    import time
+
     utilisateur = None
     try:
         utilisateur = session.query(Utilisateur).filter(Utilisateur.email==email, Utilisateur.password == password)
+        list_users = list(utilisateur)
+        if list_users != []:
+            import pickle
+
+            with open("session.dat", "wb") as fichier:
+                session_pickler = pickle.Pickler(fichier)
+                session_pickler.dump(list_users[0])
+        time.sleep(2.5)
+                      
     except Exception as error:
-        print(error)
         return False
     finally:
         return list(utilisateur)

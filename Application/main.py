@@ -7,7 +7,6 @@
 # WARNING! All changes made in this file will be lost!
 
 
-from authentification import Ui_Form
 from PyQt5 import QtCore, QtGui, QtWidgets
 from opencvQt import App
 import session
@@ -320,14 +319,8 @@ if __name__ == "__main__":
 
     app = QtWidgets.QApplication(sys.argv)
 
-    if session.utilisateur is None:
-        Form = QtWidgets.QWidget()
-        ui = Ui_Form()
-        ui.setupUi(Form)
-        Form.show()
-    else:
-        MainWindow = QtWidgets.QMainWindow()
-        ui = Ui_MainWindow()
-        ui.setupUi(MainWindow)
-        MainWindow.show()
+    MainWindow = QtWidgets.QMainWindow()
+    ui = Ui_MainWindow()
+    ui.setupUi(MainWindow)
+    MainWindow.show()
     sys.exit(app.exec_())

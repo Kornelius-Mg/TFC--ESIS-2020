@@ -26,7 +26,7 @@ class Thread(QThread):
                     h, w, ch = rgbImage.shape
                     bytesPerLine = ch * w
                     convertToQtFormat = QImage(rgbImage.data, w, h, bytesPerLine, QImage.Format_RGB888)
-                    p = convertToQtFormat.scaled(640, 480, Qt.KeepAspectRatio)
+                    p = convertToQtFormat.scaled(1200, 960, Qt.KeepAspectRatio)
                     self.changePixmap.emit(p)
 
 class App(QWidget):
@@ -46,11 +46,12 @@ class App(QWidget):
     def initUI(self):
         self.setWindowTitle(self.title)
         self.setGeometry(0, 0, 1141, 736)
-        self.resize(600, 400)
+        self.resize(1200, 960)
         # create a label
         self.label = QLabel(self)
         self.label.move(250, 150)
-        self.label.resize(640, 480)
+        self.label.resize(600, 480)
+        self.label.setScaledContents(True)
         th = Thread(self)
         th.changePixmap.connect(self.setImage)
         th.start()

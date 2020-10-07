@@ -16,3 +16,6 @@ class Utilisateur(Base):
     adresse = Column(Text)
     type = Column(String)
 
+    def __str__(self):
+        return f"id: {self.id}, Nom Complet: {self.nom_complet}, Email: {self.email}, adresse: {self.adresse}"
+

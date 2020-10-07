@@ -7,6 +7,8 @@
 # WARNING! All changes made in this file will be lost!
 
 
+import session as session_mod
+from main import Ui_MainWindow
 from datas import login_user
 from PyQt5 import QtCore, QtGui, QtWidgets
 
@@ -63,6 +65,7 @@ class Ui_Form(object):
         self.btn_exit.setAutoDefault(False)
         self.btn_exit.setDefault(False)
         self.btn_exit.setObjectName("btn_exit")
+        self.btn_exit.clicked.connect(self.exit)
         self.btn_save = QtWidgets.QPushButton(self.widget)
         self.btn_save.setGeometry(QtCore.QRect(300, 12, 136, 46))
         self.btn_save.setAutoDefault(True)
@@ -83,6 +86,8 @@ class Ui_Form(object):
 
         self.btn_save.clicked.connect(self.login)
 
+        self.form = Form
+
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
@@ -102,13 +107,35 @@ class Ui_Form(object):
 
         response = login_user(email=email, password=password)
 
-        i
-
+        if response:
+            self.exit()
+            #app = QtWidgets.QApplication(sys.argv)
+            MainWindow = QtWidgets.QMainWindow()
+            ui = Ui_MainWindow()
+            ui.setupUi(MainWindow)
+            MainWindow.show()
+            sys.exit(app.exec_())
+        else:
+            self.message_error.setVisible(True)
+    
+    def exit(self):
+        self.form.close()
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
+
     Form = QtWidgets.QWidget()
     ui = Ui_Form()
     ui.setupUi(Form)
     Form.show()
+    try:print(session_mod.utilisateur.nom_complet, session_mod.utilisateur.Adresse)
+    except: pass
+
+    if session_mod.utilisateur != None:
+        print("L'utilisateur de la session n'est plus None")
+        MainWindow = QtWidgets.QMainWindow()
+        ui = Ui_MainWindow()
+        ui.setupUi(MainWindow)
+        MainWindow.show()
+
     sys.exit(app.exec_())
