@@ -7,10 +7,22 @@
 # WARNING! All changes made in this file will be lost!
 
 
+from authentification import Ui_Form
+from session import get_session
 from PyQt5 import QtCore, QtGui, QtWidgets
 from opencvQt import App
-import session
 
+def display_authentication_window(old_window):
+    old_window.hide()
+
+    app = QtWidgets.QApplication(sys.argv)
+    Form = QtWidgets.QWidget()
+    ui = Ui_Form()
+    ui.setupUi(Form)
+    Form.show()
+    sys.exit(app.exec_())
+    
+    old_window.show()
 
 class Ui_MainWindow(object):
 
@@ -18,6 +30,10 @@ class Ui_MainWindow(object):
         MainWindow.setObjectName("MainWindow")
         MainWindow.setEnabled(True)
         MainWindow.resize(1302, 894)
+
+        if not get_session():
+            print("Aucune variable retrouvée dans la session")
+            
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.tabWidget = QtWidgets.QTabWidget(self.centralwidget)

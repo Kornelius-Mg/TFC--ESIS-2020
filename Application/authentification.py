@@ -7,8 +7,8 @@
 # WARNING! All changes made in this file will be lost!
 
 
-import session as session_mod
-from main import Ui_MainWindow
+from models import Utilisateur
+from session import set_session
 from datas import login_user
 from PyQt5 import QtCore, QtGui, QtWidgets
 
@@ -109,12 +109,6 @@ class Ui_Form(object):
 
         if response:
             self.exit()
-            #app = QtWidgets.QApplication(sys.argv)
-            MainWindow = QtWidgets.QMainWindow()
-            ui = Ui_MainWindow()
-            ui.setupUi(MainWindow)
-            MainWindow.show()
-            sys.exit(app.exec_())
         else:
             self.message_error.setVisible(True)
     
@@ -128,14 +122,4 @@ if __name__ == "__main__":
     ui = Ui_Form()
     ui.setupUi(Form)
     Form.show()
-    try:print(session_mod.utilisateur.nom_complet, session_mod.utilisateur.Adresse)
-    except: pass
-
-    if session_mod.utilisateur != None:
-        print("L'utilisateur de la session n'est plus None")
-        MainWindow = QtWidgets.QMainWindow()
-        ui = Ui_MainWindow()
-        ui.setupUi(MainWindow)
-        MainWindow.show()
-
     sys.exit(app.exec_())
